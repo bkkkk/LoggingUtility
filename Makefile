@@ -13,9 +13,16 @@ $(OBJ):
 	mkdir -p $(OBJDIR)
 	$(CC) -c $(SRC) -o $(OBJ) -I$(INCLUDE)
 
-$(STATLIB):
+$(STATLIB): $(OBJ)
 	mkdir -p $(STATDIR)
 	$(ARCHIVE) rvs $(STATLIB) $(OBJ)
 
 clean:
 	rm -rf obj/ StandAlone/
+
+install: $(STATLIB)
+	install $(STATLIB) /usr/local/lib/
+	install $(INCLUDE)/*.h /usr/local/include/LoggingUtility/
+
+.PHONY:
+	install StandAlone
