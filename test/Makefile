@@ -1,16 +1,15 @@
 CC = g++
-INCLUDE = ../LoggingUtility
-STATDIR = ../StandAlone
-STATLIB = LoggingUtility
+CFLAGS = -I/usr/local/include/LoggingUtility
+LDFLAGS = -lLoggingUtility
 EXECTUABLE = ut_LoggingUtility
-SRC = ut_LoggingUtility.cxx
+SOURCE = ut_LoggingUtility.cxx
 BINDIR = ../test-bin
 
 all: $(EXECTUABLE)
 	
 $(EXECTUABLE):
 	mkdir -p $(BINDIR)
-	$(CC) $(SRC) -o $(BINDIR)/$(EXECTUABLE) -L$(STATDIR) -l$(STATLIB) -I$(INCLUDE)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BINDIR)/$(EXECTUABLE) $(SOURCE)
 
 clean:
 	rm -rf $(BINDIR)
